@@ -2,4 +2,4 @@
 title: "About"
 permalink: /about/
 ---
-Hi, I'm **Your Name**. This blog is where I publish write-ups, research and notes.
+Cybersecurity practitioner on a threat detection team, working across DFIR, threat hunting, detection engineering and SOC operations. I write about investigations, Windows internals and how agentic AI is changing the SOC.
