@@ -9,7 +9,7 @@ subtitle: "DFIR, Threat Detection & SOC Research"
 name: "Muhap Yahia"
 description: "Write-ups, investigations and research on DFIR, threat hunting, detection engineering and AI-driven SOC operations"
 url: "https://MuhapYahia0X2.github.io"
-baseurl: ""
+baseurl: "/Venom"
 locale: "en-US"
 search: true
 words_per_minute: 200
