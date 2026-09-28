@@ -5,7 +5,7 @@ minimal_mistakes_skin: "dark"      # options: default, air, aqua, contrast, dark
 
 title: "Venom"
 title_separator: "-"
-subtitle: "DFIR, Threat Detection & SOC Research"
+subtitle: "DFIR, Threat Detection & Threat Hunting"
 name: "Muhap Yahia"
 description: "Write-ups, investigations and research on DFIR, threat hunting, detection engineering and AI-driven SOC operations"
 url: "https://MuhapYahia0X2.github.io"
