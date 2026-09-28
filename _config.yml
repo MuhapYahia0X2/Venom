@@ -1,0 +1,86 @@
+# Jekyll blog using the Minimal Mistakes theme
+# Repo name must be MuhapYahia0X2.github.io
+remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: "dark"      # options: default, air, aqua, contrast, dark, dirt, neon, mint, plum, sunrise
+
+title: "Venom"
+title_separator: "-"
+subtitle: "DFIR, Threat Detection & SOC Research"
+name: "Muhap Yahia"
+description: "Write-ups, investigations and research on DFIR, threat hunting, detection engineering and AI-driven SOC operations"
+url: "https://MuhapYahia0X2.github.io"
+baseurl: ""
+locale: "en-US"
+search: true
+words_per_minute: 200
+
+author:
+  name: "Muhap Yahia"
+  avatar: "/assets/images/avatar.png"
+  bio: "Cybersecurity practitioner on a threat detection team, working across DFIR, threat hunting, detection engineering and SOC operations. I write about investigations, Windows internals and how agentic AI is changing the SOC."
+  location: "Cairo, Egypt"
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/muhap-yahia-191617212/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/MuhapYahia0X2"
+    - label: "Defense in Arabic"
+      icon: "fas fa-fw fa-book-open"
+      url: "https://mohab-yehia.gitbook.io/defense-in-arabic"
+    - label: "Medium"
+      icon: "fab fa-fw fa-medium"
+      url: "https://medium.com/@muhapyahia"
+
+footer:
+  links:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/muhap-yahia-191617212/"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/MuhapYahia0X2"
+    - label: "Defense in Arabic"
+      icon: "fas fa-fw fa-book-open"
+      url: "https://mohab-yehia.gitbook.io/defense-in-arabic"
+
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
+  - jekyll-remote-theme
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+paginate: 6
+paginate_path: /page:num/
+timezone: Africa/Cairo
+
+include: ["_pages"]
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+defaults:
+  - scope: {path: "", type: posts}
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+      toc: true
+      toc_sticky: true
+  - scope: {path: "_pages"}
+    values:
+      layout: single
+      author_profile: true
