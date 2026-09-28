@@ -16,7 +16,7 @@ words_per_minute: 200
 
 author:
   name: "Muhap Yahia"
-  avatar: "/assets/images/avatar.png"
+  avatar: "/AV.png"
   bio: "Cybersecurity practitioner on a threat detection team, working across DFIR, threat hunting, detection engineering and SOC operations. I write about investigations, Windows internals and how agentic AI is changing the SOC."
   location: "Cairo, Egypt"
   links:
