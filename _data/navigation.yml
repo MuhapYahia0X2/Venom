@@ -1,11 +1,17 @@
 main:
   - title: "Home"
     url: /
-  - title: "Posts"
-    url: /posts/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
+  - title: "Malware Analysis"
+    url: /categories/#malware-analysis
+  - title: "DFIR"
+    url: /categories/#dfir
+  - title: "Threat Hunting"
+    url: /categories/#threat-hunting
+  - title: "Threat Detection"
+    url: /categories/#threat-detection
+  - title: "Offensive"
+    url: /categories/#offensive
+  - title: "SOC"
+    url: /categories/#soc
   - title: "About"
     url: /about/
