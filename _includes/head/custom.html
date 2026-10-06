@@ -1,0 +1,26 @@
+<!-- Renders ```mermaid code blocks as diagrams (Minimal Mistakes loads this file in <head>) -->
+<style>
+  .mermaid { text-align: center; margin: 1.5em 0; overflow-x: auto; }
+</style>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+  const start = async () => {
+    // Kramdown + Rouge wraps fenced blocks in <div class="language-mermaid ...">
+    document.querySelectorAll(".language-mermaid").forEach((block) => {
+      const holder = document.createElement("div");
+      holder.className = "mermaid";
+      holder.textContent = block.textContent;
+      block.replaceWith(holder);
+    });
+    // match the dark skin set in _config.yml; use "default" if you switch to a light skin
+    mermaid.initialize({ startOnLoad: false, theme: "dark", securityLevel: "strict" });
+    await mermaid.run({ querySelector: ".mermaid" });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start);
+  } else {
+    start();
+  }
+</script>
