@@ -73,9 +73,11 @@ Before writing any Hunt , we need to know which layers of a server are visible f
 | Application behavior | Whatever the scanner can extract from the service itself, such as a Cobalt Strike beacon config | Version, watermark, public key hash |
 | Domain and DNS | Resolutions, naming patterns, certificates seen per domain | A fixed pattern such as victim name followed by a login-themed word |
 
+For ex :
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image.png" alt="Scanner-visible infrastructure layers">
+
 Keep this table in your head. Every hunting Hunt  in the rest of the article is a combination of rows from it.
 
-![Scanner-visible infrastructure layers]({{ "/assets/images/image.png" | relative_url }})
 
 ### 1.4 Where Does the Data Come From?
 
