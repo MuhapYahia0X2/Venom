@@ -1,5 +1,5 @@
 ---
-title: "Infrastructure Hunting Mindset: How We Track C2 Servers and the APT Behind Them"
+title: "Infrastructure Hunting Mindset: How To Track C2 Servers and the APT Behind Them"
 date: 2026-10-06
 categories: [Threat Intel]
 tags: [c2, threat-hunting, apt, infrastructure, cobalt-strike, jarm, dfir]
@@ -155,6 +155,7 @@ Why? Think about the difference between two sentences. "A scanner thinks this se
 Imagine you open a public IOC feed and see a fresh entry tagged with a RAT family. Here is how I would walk it.
 
 Ex:
+
 <img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-2.png" alt="">
 
 
@@ -279,6 +280,7 @@ Threat reports are full of IOCs, and most of them are already dead by the time w
 When reading a report as a hunter, ask: what pattern repeats?
 
 For Ex:
+
 - In a Pikabot analysis, the C2 ports were the same ones used by the proxy module of an older loader. A port habit.
 - The same Pikabot servers presented certificates filled with random-looking words. Each value is random, so it cannot be searched directly, but the weirdness itself is a way to validate results. (In Chapter 4 we will see a fingerprint that looks at the shape of a certificate instead of its values.)
 - In the CISA report on Scattered Spider, the domain names followed a fixed shape: the victim name followed by a login-themed word. That turned into a hypothesis and then into a Hunt .
