@@ -74,6 +74,7 @@ Before writing any Hunt , we need to know which layers of a server are visible f
 | Domain and DNS | Resolutions, naming patterns, certificates seen per domain | A fixed pattern such as victim name followed by a login-themed word |
 
 For ex :
+
 <img src="https://muhapyahia0x2.github.io/Venom/assets/images/image.png" alt="Scanner-visible infrastructure layers">
 
 Keep this table in your head. Every hunting Hunt  in the rest of the article is a combination of rows from it.
@@ -142,7 +143,7 @@ And the attribution? The honest answer was: we have a suspicion about which grou
 
 That is the mindset. Each hypothesis is weak. The intersection of weak hypotheses is strong. And the conclusion is stated with the confidence it deserves.
 
-![Redirect hunting example]({{ "/assets/images/image-3.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-3.png" alt="">
 
 
 ### 2.2 Start From the Malware: The Third Door
@@ -154,12 +155,13 @@ Why? Think about the difference between two sentences. "A scanner thinks this se
 Imagine you open a public IOC feed and see a fresh entry tagged with a RAT family. Here is how I would walk it.
 
 Ex:
-![Malware-first workflow example]({{ "/assets/images/image-2.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-2.png" alt="">
 
 
-![C2 analysis example]({{ "/assets/images/image-4.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-4.png" alt="">
 
 Work Flow:
+
 
 ```mermaid
 flowchart LR
@@ -169,6 +171,7 @@ flowchart LR
  D --> E["Hash search in a URL scanner<br/>same file, other servers"]
  E --> F["Internet scanners<br/>fingerprint and cluster"]
 ```
+
 
 - Read the entry properly. Not only the IP. Look at the family, who reported it, when it was first and last seen, which ASN it sits in, and where the reference points.
 - Get the sample. The reference often leads to a sample repository. A sample is worth more than any IOC, because you can run it.
@@ -195,25 +198,33 @@ Three things to check, every time:
 - HTTP headers and responses. Search the repository for strings like HTTP, Headers, 404, 301, Redirect and Location. Build your own list of interesting strings.
 
 EX:
-![HTTP response example]({{ "/assets/images/image-5.png" | relative_url }})
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-5.png" alt="">
+
 
 - Certificates. How does the framework generate or ship its certificate? Which subject fields does it fill?
 
+
 EX:
-![Certificate generation example]({{ "/assets/images/image-6.png" | relative_url }})
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-6.png" alt="">
+
 
 - Hardcoded strings. Anything the developer typed that ends up on the wire.
 
 Ex:
-![Hardcoded strings example]({{ "/assets/images/image-7.png" | relative_url }})
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-7.png" alt="">
 
 Here is why this works. The developer had to implement a web server response so the C2 looks like a normal website. Whatever they typed in that file is what thousands of operators deploy, unless the operator knows to change it.
 
 A few examples of what this finds:
 
 - Havoc ships a custom header inside its default 404 response. One unique string, one very clean Hunt .
+
 EX:
-![Havoc HTTP response example]({{ "/assets/images/image-8.png" | relative_url }})
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-8.png" alt="">
 
 - PoshC2 ships a default certificate with recognizable values. Searching those values finds default deployments.
 - Old versions of the Responder tool contain a hardcoded date string inside the response. Notice the limit here: it works only against the old versions, so know which version your string belongs to.
@@ -232,7 +243,9 @@ The idea is to find strings or behaviors that the developer or framework leaves 
 For example, a unique header, a specific 404 response, or a recognizable certificate value can become a fingerprint.
 
 Ex:
-![Network fingerprint example]({{ "/assets/images/image-9.png" | relative_url }})
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-9.png" alt="">
+
 
 Then we check if this behavior is consistent across different deployments and versions.
 
@@ -300,10 +313,14 @@ In Chapter 1 we listed the layers. Now let's open the ones people use without fu
 
 The certificate is the obvious one: subject fields, issuer, key size, dates. A default or generated certificate repeats across servers, so it is easy to search. And easy to replace. The operator can swap it in a minute.
 
-![TLS certificate example]({{ "/assets/images/image-10.png" | relative_url }})
+EX:
 
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-10.png" alt="">
 
-![JARM example]({{ "/assets/images/image-11.png" | relative_url }})
+EX:
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-11.png" alt="">
+
 
 JARM goes one level deeper, and it is easier to understand with a picture in your head.
 
@@ -313,7 +330,7 @@ That is JARM. The scanner connects to the TLS port ten times, with ten different
 
 Notice what is being fingerprinted: not the certificate, but the software behind it. That is why a JARM survives a certificate change, and why we like it for clustering.
 
-![TLS fingerprint example]({{ "/assets/images/image-12.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-12.png" alt="">
 
 Now the limits. They matter as much as the idea.
 - Unrelated servers share it. A talk at HITB 2021 pointed out that the JARM people associate with Cobalt Strike is basically the JARM of the Java TLS stack underneath it. Any ordinary Java server can look the same. So a JARM is a hint, not a verdict.
@@ -340,7 +357,8 @@ Most of us read an HTTP response like a human: what does the page say? A fingerp
 
 Scanners give us hashes of the headers and the body. They are cheap and powerful, and also dangerously generic. A plain 404 matches half of the internet, which is exactly what happened with the 500,000 hosts in Chapter 2.
 
-![HTTP response fingerprint example]({{ "/assets/images/image-13.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-13.png" alt="">
+
 
 How small can a fingerprint be? Smaller than you think. There is a real story about a single extra space in a status line. I will tell it in Chapter 7, because it teaches the most important lesson of the article.
 
@@ -375,7 +393,8 @@ A C2 server usually runs more than the C2. An SSH service for the operator. An F
 - Service banners. An unusual FTP or file-transfer banner shared by servers at one provider can reveal a cluster, especially when a vendor report describes the same banner.
 
 EX:
-![SSH or service banner example]({{ "/assets/images/image-14.png" | relative_url }})
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-14.png" alt="">
 
 Be careful here. Hosting providers also deploy one image to many customers, and then a shared SSH key links innocent people to the actor. Treat these as leads, and write down that they are weak.
 
@@ -428,8 +447,9 @@ Google dorking means using search operators like intitle:, inurl:, site: and fil
 ```
 intitle:"index of" "parent directory"
 ```
+EX:
 
-![Google dorking example]({{ "/assets/images/image-15.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-15.png" alt="">
 
 Now the part most tutorials skip. Google only knows pages its crawler reached by following links. A C2 on a bare IP, with no domain and no link pointing to it, is almost never there. To find live infrastructure, scanners and URL scanners beat Google by a wide margin. Honestly, it is the weakest tool in this article for that job.
 
@@ -443,7 +463,9 @@ So where does it still earn a place?
 intitle:"index of" "parent directory" ("payload" | "loader" | "stager")
 ```
 
-![Open directory search example]({{ "/assets/images/image-16.png" | relative_url }})
+EX
+
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-16.png" alt="">
 
 - Brand copies. A brand's phrase plus the exclusion of the brand's own domain can find clones that got indexed.
 
@@ -559,7 +581,7 @@ There is a second way in. Cloudflare only proxies a fixed list of ports. So a Hu
 
 The mindset here: a proxy hides the domain, not the origin. The origin still has to answer someone, and if it answers a scanner, it leaks.
 
-![Cloudflare origin hunting example]({{ "/assets/images/image-17.png" | relative_url }})
+<img src="https://muhapyahia0x2.github.io/Venom/assets/images/image-17.png" alt="Cloudflare origin hunting example">
 
 ### 7.4 They Redirect and Imitate
 
